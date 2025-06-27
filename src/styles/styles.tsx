@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     flexDirection: "row",
     justifyContent: "space-around",
+    paddingHorizontal: "auto",
     padding: 10,
     borderTopStartRadius: 20,
   }

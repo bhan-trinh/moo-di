@@ -15,12 +15,12 @@
 
 import { NewAppScreen } from '@react-native/new-app-screen';
 import { Button, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, useColorScheme, View } from 'react-native';
-import { NoteItem } from './models';
+import { NoteItem } from '../models';
 import { useCallback, useEffect, useState } from 'react';
-import { createTable, delNoteItem, delTable, getDBConnection, getNoteItems, saveNoteItems } from './db-service';
+import { createTable, delNoteItem, delTable, getDBConnection, getNoteItems, saveNoteItems } from './services/db-service';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import styles from './styles';
-import { NoteItemComponent } from './NoteItem';
+import styles from './styles/styles';
+import { NoteItemComponent } from './components/NoteItem';
 import Icon from '@react-native-vector-icons/fontawesome6';
 
 function App() {

@@ -1,7 +1,7 @@
 import React from 'react'
-import { NoteItem } from './models'
+import { NoteItem } from '../../models'
 import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import styles from './styles';
+import styles from '../styles/styles';
 
 export const NoteItemComponent: React.FC<{
     note: NoteItem;

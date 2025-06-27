@@ -1,5 +1,5 @@
 import { enablePromise, openDatabase, SQLiteDatabase } from "react-native-sqlite-storage"
-import { NoteItem } from "./models";
+import { NoteItem } from "../../models";
 
 const tableName = 'notesData';
 
