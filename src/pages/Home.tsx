@@ -1,17 +1,17 @@
 import { NewAppScreen } from '@react-native/new-app-screen';
 import { Button, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, useColorScheme, View } from 'react-native';
 import { NoteItem } from '../../models';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { createTable, delNoteItem, delTable, getDBConnection, getNoteItems, saveNoteItems } from '../services/db-service';
 import styles from '../styles/styles';
 import { NoteItemComponent } from '../components/NoteItem';
 import Icon from '@react-native-vector-icons/fontawesome6';
+import { NotesContext } from '../services/NoteContext';
 
 
 export const Home = ({navigation}) => {
-  const [notes, setNotes] = useState<NoteItem[]>([]);
+  const { notes, setNotes } = useContext(NotesContext)
   const [filteredNotes, setFilteredNotes] = useState<NoteItem[]>([])
-  const [newNote, setNewNote] = useState('')
   const [searchWord, setSearch] = useState('')
 
   const loadDataCallback = useCallback(async () => {
@@ -45,6 +45,7 @@ export const Home = ({navigation}) => {
 }, [])
 
 useEffect(() => {
+  console.log(`Home: ${notes}`)
     if (searchWord === '') setFilteredNotes(notes);
 
     // Find notes that match searched keywords
@@ -64,27 +65,7 @@ useEffect(() => {
   loadDataCallback()
 }, [loadDataCallback])
 
-const addNote = async() => {
-  if (!newNote.trim()) return;
-  var date = new Date().toString()
-  try {
-    const newNotes = [...notes, {
-      id: notes.length ? notes.reduce((acc, cur) => {
-        if (cur.id > acc.id) return cur;
-        return acc;
-      }).id + 1 : 0, value: newNote, datetime: date
-    }];
 
-    setNotes(newNotes)
-    console.log(filteredNotes)
-
-    const db = await getDBConnection()
-    await saveNoteItems(db, newNotes)
-    setNewNote('')
-  } catch (error) {
-    console.error(error);
-  }
-};
 
   const delNote = async (id: number) => {
     try {
@@ -126,20 +107,12 @@ const addNote = async() => {
         placeholder='search a word'
         />
 
-      {/* Add New Note */}
-      <TextInput
-      style={[styles.textInput, styles.text]}
-      value={newNote}
-      onChangeText={(text) => setNewNote(text)}
-      placeholder='write a new note'
-      />
-
-      <TouchableOpacity style={styles.button} onPress={
-        // () => navigation.navigate('NewNote')
-        addNote
+        
+        <TouchableOpacity style={styles.button} onPress={
+        () => navigation.navigate('NewNote')
         }>
         <Text style={styles.buttonText}>+New</Text>
-      </TouchableOpacity>
+        </TouchableOpacity>
 
       {/* Notes */}
       <View style={styles.noteList}>

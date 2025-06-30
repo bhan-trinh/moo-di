@@ -26,6 +26,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Home } from './pages/Home';
 import { NewNote } from './pages/NewNote';
+import { NotesContext, NotesProvider } from './services/NoteContext';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
   const Stack = createNativeStackNavigator()
 
   return (
+    <NotesProvider>
     <SafeAreaView style={styles.centeredView}>
       <NavigationContainer>
         <Stack.Navigator>
@@ -52,6 +54,7 @@ function App() {
     </Stack.Navigator>
     </NavigationContainer>
     </SafeAreaView>
+    </NotesProvider>
 
 
   );
