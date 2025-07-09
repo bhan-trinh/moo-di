@@ -1,4 +1,4 @@
-import { Platform, StyleSheet } from "react-native";
+import { Platform, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   welcomeBox: {
@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
     color: 'black',
     fontFamily: Platform.select({
       android: 'monospace',
-      ios: 'Futura'}),
+      ios: 'Futura',
+    }),
     fontSize: 30,
     textAlign: 'center',
   },
@@ -27,7 +28,8 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontFamily: Platform.select({
       android: 'monospace',
-      ios: 'Futura'}),
+      ios: 'Futura',
+    }),
   },
 
   container: {
@@ -40,7 +42,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: Platform.select({
       android: 'monospace',
-      ios: 'Futura'}),
+      ios: 'Futura',
+    }),
     textAlign: 'center',
   },
 
@@ -49,7 +52,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     padding: 20,
     justifyContent: 'space-around',
-
   },
 
   button: {
@@ -62,7 +64,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: Platform.select({
       android: 'monospace',
-      ios: 'Futura'}),
+      ios: 'Futura',
+    }),
     textAlign: 'center',
     color: 'white',
     margin: 10,
@@ -99,19 +102,18 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: 'space-around',
     flex: 1,
-    flexDirection: "column-reverse",
+    flexDirection: 'column-reverse',
   },
 
   botNavBar: {
     borderColor: 'black',
     borderWidth: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    paddingHorizontal: "auto",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingHorizontal: 'auto',
     padding: 10,
     borderTopStartRadius: 20,
-  }
+  },
 });
 
-
-export default styles
+export default styles;
