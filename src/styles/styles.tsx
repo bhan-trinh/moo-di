@@ -100,9 +100,7 @@ const styles = StyleSheet.create({
 
   noteList: {
     padding: 20,
-    justifyContent: 'space-around',
     flex: 1,
-    flexDirection: 'column-reverse',
   },
 
   botNavBar: {
