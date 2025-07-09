@@ -13,13 +13,13 @@ export const NewNoteScreen = ({ navigation, route }) => {
   const [newNote, setNewNote] = useState('');
   const [newMood, setMood] = useState(50);
   const { notes, setNotes } = useContext(NotesContext);
-  const { prompt } = route.params;
+  const { prompt } = route.params ? route.params : '';
   const isFocused = useIsFocused();
 
   useEffect(() => {
     if (!isFocused) {
       // Clear params when the screen loses focus
-      navigation.setParams({ prompt: undefined });
+      navigation.setParams({ prompt: '' });
     }
   }, [isFocused, navigation]);
 
