@@ -4,6 +4,7 @@ export type NoteItem = {
   datetime: string;
   user: string;
   mood: number;
+  prompt?: string;
 };
 
 export const colMap = {
@@ -12,4 +13,5 @@ export const colMap = {
   datetime: ['datetime', 'TEXT NOT NULL'],
   user: ['user', 'TEXT NOT NULL'],
   mood: ['mood', 'INTEGER'],
+  prompt: ['prompt', 'TEXT'],
 };

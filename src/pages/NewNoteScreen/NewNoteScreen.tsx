@@ -1,17 +1,27 @@
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from '../../styles/styles';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { NotesContext } from '../../services/NoteContext';
 import { getDBConnection, saveNoteItems } from '../../services/NotesDB';
 import Icon from '@react-native-vector-icons/lucide';
 import Slider from '@react-native-community/slider';
 import { user } from '../HomeScreen/HomeScreen';
+import { useIsFocused } from '@react-navigation/native';
 
-export const NewNoteScreen = ({ navigation }) => {
+export const NewNoteScreen = ({ navigation, route }) => {
   const [newNote, setNewNote] = useState('');
   const [newMood, setMood] = useState(50);
   const { notes, setNotes } = useContext(NotesContext);
+  const { prompt } = route.params;
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (!isFocused) {
+      // Clear params when the screen loses focus
+      navigation.setParams({ prompt: undefined });
+    }
+  }, [isFocused, navigation]);
 
   const addNote = async () => {
     if (!newNote.trim()) return;
@@ -30,6 +40,7 @@ export const NewNoteScreen = ({ navigation }) => {
           datetime: date,
           user: user,
           mood: newMood,
+          prompt: prompt,
         },
       ];
 
@@ -53,9 +64,20 @@ export const NewNoteScreen = ({ navigation }) => {
         <Icon name="x" size={30} />
       </TouchableOpacity>
       <Text style={styles.welcomeText}>create a note!</Text>
+
+      {prompt && (
+        <View>
+          <Text style={styles.text}>{prompt}</Text>
+        </View>
+      )}
       {/* Add New Note */}
       <TextInput
-        style={[styles.textInput, styles.text]}
+        style={[
+          styles.textInput,
+          styles.text,
+          { height: 300, textAlign: 'left' },
+        ]}
+        textAlignVertical="top"
         multiline
         numberOfLines={4}
         value={newNote}
@@ -76,10 +98,13 @@ export const NewNoteScreen = ({ navigation }) => {
       />
       <Text style={styles.text}>{newMood}%</Text>
 
-      <TouchableOpacity style={styles.button} onPress={() =>{
-        addNote()
-        navigation.navigate("Home")
-      }}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          addNote();
+          navigation.navigate('Home');
+        }}
+      >
         <Text style={styles.buttonText}>Create</Text>
       </TouchableOpacity>
     </View>

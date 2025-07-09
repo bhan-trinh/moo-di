@@ -11,7 +11,7 @@ import {
 export const NoteItemComponent: React.FC<{
   note: NoteItem;
   deleteItem: Function;
-}> = ({ note: { id, value, datetime, user, mood }, deleteItem }) => {
+}> = ({ note: { id, value, datetime, user, mood, prompt }, deleteItem }) => {
   var dt = datetime.split(' ');
   var t = dt[4].split(':');
   var datetimeTrim = `${t[0]}:${t[1]} ${dt[1]} ${dt[2]} ${dt[3]}`;
@@ -44,6 +44,7 @@ export const NoteItemComponent: React.FC<{
         <Text style={[nStyle.text, nStyle.bottomText]}>
           {'\n'}from {user}
           {'\n'}mood {mood}
+          {prompt ? `${'\n'}prompt ${prompt}` : ''}
         </Text>
       </View>
     </View>

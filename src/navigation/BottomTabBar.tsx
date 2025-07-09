@@ -5,6 +5,8 @@ import Icon from '@react-native-vector-icons/lucide';
 import styles from '../styles/styles';
 import { Platform } from 'react-native';
 import { ReportScreen } from '../pages/ReportScreen/ReportScreen';
+import { PromptScreen } from '../pages/PromptScreen/PromptScreen';
+import { AccountScreen } from '../pages/AccountScreen/AccountScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +22,7 @@ const screenOptions = ({ route }) => ({
     var iconMap = {
       Home: 'house',
       Prompts: 'box',
-      '+': 'plus',
+      NewNote: 'plus',
       Report: 'smile',
       Account: 'user',
     };
@@ -52,11 +54,11 @@ export const BottomTabBar = () => {
       />
       <Tab.Screen
         name="Prompts"
-        component={NewNoteScreen}
+        component={PromptScreen}
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="+"
+        name="NewNote"
         component={NewNoteScreen}
         options={{ headerShown: false }}
       />
@@ -67,7 +69,7 @@ export const BottomTabBar = () => {
       />
       <Tab.Screen
         name="Account"
-        component={NewNoteScreen}
+        component={AccountScreen}
         options={{ headerShown: false }}
       />
     </Tab.Navigator>

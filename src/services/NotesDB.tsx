@@ -26,6 +26,10 @@ const getAttr = () =>
     .map(val => val[0])
     .join(',');
 
+const getPlaceholder = () =>
+  Object.values(colMap)
+    .map(val => '?')
+    .join(',');
 enablePromise(true);
 
 export const getDBConnection = async () => {
@@ -92,7 +96,7 @@ export const saveNoteItems = async (
   db: SQLiteDatabase,
   noteItems: NoteItem[],
 ) => {
-  const insertQuery = `INSERT OR REPLACE INTO ${tableName} (${getColNames()}) VALUES (?, ?, ?, ?, ?)`;
+  const insertQuery = `INSERT OR REPLACE INTO ${tableName} (${getColNames()}) VALUES (${getPlaceholder()})`;
 
   const insertParams = noteItems.map(i =>
     getAttr()
