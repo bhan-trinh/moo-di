@@ -14,8 +14,11 @@ import { user } from '../HomeScreen/HomeScreen';
 import { LineChart } from 'react-native-gifted-charts';
 import { MoodLabel } from '../../models/MoodLabel';
 import { NoteItem } from '../../models/NoteItem';
+import { ReportScreenNavigationProp } from '../../navigation/type';
 
-export const ReportScreen = ({ navigation }) => {
+export const ReportScreen: React.FC<ReportScreenNavigationProp> = ({
+  navigation,
+}: ReportScreenNavigationProp) => {
   /*
     const [moods, setMoods] = useState<MoodLabel[]>([])
     useEffect(() => {async () => {

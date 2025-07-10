@@ -19,11 +19,14 @@ import {
 import styles from '../../styles/styles';
 import { NoteItemComponent } from '../../components/NoteItemComponent';
 import { NotesContext } from '../../services/NoteContext';
+import { HomeScreenNavigationProp } from '../../navigation/type';
 
 export const user = 'user';
 
-export const HomeScreen = ({ navigation }) => {
-  const { notes, setNotes } = useContext(NotesContext);
+export const HomeScreen: React.FC<HomeScreenNavigationProp> = ({
+  navigation,
+}: HomeScreenNavigationProp) => {
+  const { notes, setNotes } = useContext<NoteItem[]>(NotesContext);
   const [filteredNotes, setFilteredNotes] = useState<NoteItem[]>([]);
   const [searchWord, setSearch] = useState('');
   const flatlistRef = useRef<FlatList>(null);

@@ -1,7 +1,10 @@
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import styles from '../../styles/styles';
+import { PromptScreenNavigationProp } from '../../navigation/type';
 
-export const PromptScreen = ({ navigation }) => {
+export const PromptScreen: React.FC<PromptScreenNavigationProp> = ({
+  navigation,
+}: PromptScreenNavigationProp) => {
   const prompts = [
     'what did you eat today?',
     'what is one thing you are grateful for this week?',

@@ -7,6 +7,7 @@ import { Platform } from 'react-native';
 import { ReportScreen } from '../pages/ReportScreen/ReportScreen';
 import { PromptScreen } from '../pages/PromptScreen/PromptScreen';
 import { AccountScreen } from '../pages/AccountScreen/AccountScreen';
+import { DefaultNavigatorOptions } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,7 +22,7 @@ const screenOptions = ({ route }) => ({
   tabBarIcon: ({ focused }) => {
     var iconMap = {
       Home: 'house',
-      Prompts: 'box',
+      Prompt: 'box',
       NewNote: 'plus',
       Report: 'smile',
       Account: 'user',
@@ -53,7 +54,7 @@ export const BottomTabBar = () => {
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="Prompts"
+        name="Prompt"
         component={PromptScreen}
         options={{ headerShown: false }}
       />

@@ -1,5 +1,4 @@
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from '../../styles/styles';
 import { useContext, useEffect, useState } from 'react';
 import { NotesContext } from '../../services/NoteContext';
@@ -8,8 +7,12 @@ import Icon from '@react-native-vector-icons/lucide';
 import Slider from '@react-native-community/slider';
 import { user } from '../HomeScreen/HomeScreen';
 import { useIsFocused } from '@react-navigation/native';
+import { NewNoteScreenNavigationProp } from '../../navigation/type';
 
-export const NewNoteScreen = ({ navigation, route }) => {
+export const NewNoteScreen: React.FC<NewNoteScreenNavigationProp> = ({
+  navigation,
+  route,
+}: NewNoteScreenNavigationProp) => {
   const [newNote, setNewNote] = useState('');
   const [newMood, setMood] = useState(50);
   const { notes, setNotes } = useContext(NotesContext);
