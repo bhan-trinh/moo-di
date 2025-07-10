@@ -7,11 +7,11 @@ export type NoteItem = {
   prompt?: string;
 };
 
-export const colMap = {
-  id: ['id', 'INTEGER NOT NULL'],
-  value: ['value', 'TEXT NOT NULL'],
-  datetime: ['datetime', 'TEXT NOT NULL'],
-  user: ['user', 'TEXT NOT NULL'],
-  mood: ['mood', 'INTEGER'],
-  prompt: ['prompt', 'TEXT'],
-};
+export const noteItemCol = [
+  { attr: 'id', type: 'INTEGER NOT NULL' },
+  { attr: 'value', type: 'TEXT NOT NULL' },
+  { attr: 'datetime', type: 'TEXT NOT NULL' },
+  { attr: 'user', type: 'TEXT NOT NULL' },
+  { attr: 'mood', type: 'INTEGER' },
+  { attr: 'prompt', type: 'TEXT' },
+];

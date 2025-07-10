@@ -3,33 +3,23 @@ import {
   openDatabase,
   SQLiteDatabase,
 } from 'react-native-sqlite-storage';
-import { NoteItem, colMap } from '../models/NoteItem';
-import { MoodLabel } from '../models/MoodLabel';
+import { NoteItem, noteItemCol } from '../models/NoteItem';
 
+// Set up table name
 const tableName = 'notesData';
+
+// Get column names
 const getCol = () =>
-  Object.keys(colMap)
-    .map((key: string) => {
-      return `${key} ${colMap[key][1]}`;
+  noteItemCol
+    .map(item => {
+      return `${item.attr} ${item.type}`;
     })
     .join(',');
 
-const getColNames = () => Object.keys(colMap).join(',');
+const getAttr = () => noteItemCol.map(col => col.attr).join(',');
 
-const getColAliases = () =>
-  Object.keys(colMap)
-    .map(key => (key === colMap[key][0] ? key : `${key} as ${colMap[key][0]}`))
-    .join(',');
+const getPlaceholder = () => noteItemCol.map(_ => '?').join(',');
 
-const getAttr = () =>
-  Object.values(colMap)
-    .map(val => val[0])
-    .join(',');
-
-const getPlaceholder = () =>
-  Object.values(colMap)
-    .map(val => '?')
-    .join(',');
 enablePromise(true);
 
 export const getDBConnection = async () => {
@@ -37,7 +27,6 @@ export const getDBConnection = async () => {
     name: 'moomood-track.db',
     location: 'default',
   });
-  console.log('Database connection established');
   return db;
 };
 
@@ -55,7 +44,7 @@ export const getNoteItems = async (db: SQLiteDatabase): Promise<NoteItem[]> => {
   try {
     const noteItems: NoteItem[] = [];
     const results = await db.executeSql(`
-            SELECT ${getColAliases()} FROM ${tableName};
+            SELECT ${getAttr()} FROM ${tableName};
             `);
     results.forEach(result => {
       for (let i = 0; i < result.rows.length; i++) {
@@ -69,45 +58,22 @@ export const getNoteItems = async (db: SQLiteDatabase): Promise<NoteItem[]> => {
   }
 };
 
-/*
-export const getMood = async (db: SQLiteDatabase): Promise<MoodLabel[]> => {
-  try {
-    var moods: MoodLabel[] = [];
-    const results = await db.executeSql(`
-            SELECT rowid as label, mood as value FROM ${tableName};
-            `);
-    results.forEach(result => {
-
-      
-      for (let i = 0; i < result.rows.length; i++) {
-              moods.push(result.rows.item(i))
-              console.log(result.rows.item(i))
-      }
-  });
-  return moods
-    // return moods;
-  } catch (error) {
-    console.error(error);
-    throw Error('Failed to get note items.');
-  }
-};*/
-
 export const saveNoteItems = async (
   db: SQLiteDatabase,
   noteItems: NoteItem[],
 ) => {
-  const insertQuery = `INSERT OR REPLACE INTO ${tableName} (${getColNames()}) VALUES (${getPlaceholder()})`;
+  const insertQuery = `INSERT OR REPLACE INTO ${tableName} (${getAttr()}) VALUES (${getPlaceholder()})`;
 
   const insertParams = noteItems.map(i =>
     getAttr()
       .split(',')
-      .map(attr => i[attr]),
+      .map(attr => i[attr as keyof NoteItem]),
   );
 
   // Run each insert with bindings
-  const insertPromises = insertParams.map(params =>
-    db.executeSql(insertQuery, params),
-  );
+  const insertPromises = insertParams.map(params => {
+    db.executeSql(insertQuery, params);
+  });
 
   return Promise.all(insertPromises);
 };
