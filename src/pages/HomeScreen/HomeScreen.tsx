@@ -149,6 +149,27 @@ export const HomeScreen: React.FC<HomeScreenNavigationProp> = ({
       {/* Display notes */}
 
       <View style={styles.noteList}>
+        <TouchableOpacity
+          style={{ zIndex: 5 }}
+          onPress={() => {
+            flatlistRef.current?.scrollToEnd();
+          }}
+        >
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: 'black',
+              backgroundColor: '#EEE',
+              width: '100%',
+              bottom: 0,
+              alignSelf: 'center',
+              position: 'absolute',
+              justifyContent: 'center',
+            }}
+          >
+            <Text style={{ color: 'black', textAlign: 'center' }}>^</Text>
+          </View>
+        </TouchableOpacity>
         {
           <FlatList
             // If filtered notes lag behind and has none
@@ -176,10 +197,7 @@ export const HomeScreen: React.FC<HomeScreenNavigationProp> = ({
         }
       </View>
       <TouchableOpacity
-        onPress={() => {
-          let index = notes.length - 1;
-          flatlistRef.current.scrollToIndex({ index: index });
-        }}
+        onPress={() => navigation.navigate('NewNote', { prompt: undefined })}
       >
         <View
           style={{
@@ -196,7 +214,7 @@ export const HomeScreen: React.FC<HomeScreenNavigationProp> = ({
             justifyContent: 'center',
           }}
         >
-          <Text style={{ color: 'black', textAlign: 'center' }}>^</Text>
+          <Text style={{ color: 'black', textAlign: 'center' }}>+</Text>
         </View>
       </TouchableOpacity>
     </>
