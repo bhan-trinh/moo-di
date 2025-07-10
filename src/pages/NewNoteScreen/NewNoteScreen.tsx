@@ -21,24 +21,31 @@ export const NewNoteScreen: React.FC<NewNoteScreenNavigationProp> = ({
 
   useEffect(() => {
     if (!isFocused) {
-      // Clear params when the screen loses focus
-      navigation.setParams({ prompt: '' });
+      // Clear prompt params when screen loses focus
+      navigation.setParams({ prompt: undefined });
     }
   }, [isFocused, navigation]);
 
+  // Async func to add new note to database
   const addNote = async () => {
+    // If no text in new note text input
     if (!newNote.trim()) return;
+
+    // Calculate date
     var date = new Date().toString();
     try {
       const newNotes = [
-        ...notes,
+        ...notes, // Copy old notes
+
+        // Prepare new note
         {
           id: notes.length
-            ? notes.reduce((acc, cur) => {
+            ? // Find highest id then increment
+              notes.reduce((acc, cur) => {
                 if (cur.id > acc.id) return cur;
                 return acc;
               }).id + 1
-            : 0,
+            : 0, // If no note
           value: newNote,
           datetime: date,
           user: user,
@@ -47,10 +54,14 @@ export const NewNoteScreen: React.FC<NewNoteScreenNavigationProp> = ({
         },
       ];
 
+      // Add to note context
       setNotes(newNotes);
 
+      // Add to database
       const db = await getDBConnection();
       await saveNoteItems(db, newNotes);
+
+      // Reset new note screen for next time
       setNewNote('');
       setMood(50);
     } catch (error) {
@@ -59,7 +70,7 @@ export const NewNoteScreen: React.FC<NewNoteScreenNavigationProp> = ({
   };
 
   return (
-    <View style={{ padding: 30 }}>
+    <View padding={30}>
       <TouchableOpacity
         onPress={() => navigation.navigate('Home')}
         style={{ alignItems: 'flex-end' }}

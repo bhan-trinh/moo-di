@@ -67,6 +67,7 @@ export const HomeScreen: React.FC<HomeScreenNavigationProp> = ({
     }
   }, []);
 
+  // Refresh notes display everytime notes context / searched word change
   useEffect(() => {
     console.log(`Home: ${notes}`);
     if (searchWord === '') setFilteredNotes(notes);
@@ -85,14 +86,16 @@ export const HomeScreen: React.FC<HomeScreenNavigationProp> = ({
     loadDataCallback();
   }, [loadDataCallback]);
 
+  // Delete note
   const delNote = async (id: number) => {
     try {
       const db = await getDBConnection();
       await delNoteItem(db, id);
 
       // Remove note from notes state variable
-      setNotes(oldNotes => {
-        // If remove by using id as index, the pos in array and the actual id might be mismatched
+      setNotes((oldNotes: NoteItem[]) => {
+        // Remove by database id
+        // Since there might be notes deleted inbetween which changes pos but not actual id in db, index in array and the actual id might be mismatched
         var newNotes = [...oldNotes];
         for (var i = 0; i < newNotes.length; i++) {
           if (notes[i].id == id) {
