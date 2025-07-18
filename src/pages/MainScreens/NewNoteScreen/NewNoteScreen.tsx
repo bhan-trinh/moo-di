@@ -1,21 +1,23 @@
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-import styles from '../../styles/styles';
+import styles from '../../../styles/styles';
 import { useContext, useEffect, useState } from 'react';
-import { NotesContext } from '../../services/NoteContext';
-import { getDBConnection, saveNoteItems } from '../../services/NotesDB';
+import { NotesContext } from '../../../services/NoteContext';
+import { getDBConnection, saveNoteItems } from '../../../services/NotesDB';
 import Icon from '@react-native-vector-icons/lucide';
 import Slider from '@react-native-community/slider';
-import { user } from '../HomeScreen/HomeScreen';
 import { useIsFocused } from '@react-navigation/native';
-import { NewNoteScreenNavigationProp } from '../../navigation/type';
+import { NewNoteScreenNavigationProp } from '../../../navigation/type';
+import { NoteItem } from '../../../models/NoteItem';
+import { UserContext } from '../../../services/UserContext';
 
 export const NewNoteScreen: React.FC<NewNoteScreenNavigationProp> = ({
   navigation,
   route,
 }: NewNoteScreenNavigationProp) => {
+  const { userName } = useContext(UserContext);
   const [newNote, setNewNote] = useState('');
   const [newMood, setMood] = useState(50);
-  const { notes, setNotes } = useContext(NotesContext);
+  const { notes, setNotes } = useContext<NoteItem[]>(NotesContext);
   const { prompt } = route.params ? route.params : '';
   const isFocused = useIsFocused();
 
@@ -32,26 +34,28 @@ export const NewNoteScreen: React.FC<NewNoteScreenNavigationProp> = ({
     if (!newNote.trim()) return;
 
     // Calculate date
-    var date = new Date().toString();
+    var date = new Date().toISOString();
+
     try {
-      const newNotes = [
+      const newNoteItem: NoteItem = {
+        id: notes.length
+          ? // If already notes, find highest id then increment
+            notes.reduce((acc: NoteItem, cur: NoteItem) => {
+              if (cur.id > acc.id) return cur;
+              return acc;
+            }).id + 1
+          : 0, // If no notes
+        value: newNote,
+        created_at: date,
+        user: userName,
+        mood: newMood,
+        prompt: prompt,
+      };
+      const newNotes: NoteItem[] = [
         ...notes, // Copy old notes
 
         // Prepare new note
-        {
-          id: notes.length
-            ? // Find highest id then increment
-              notes.reduce((acc, cur) => {
-                if (cur.id > acc.id) return cur;
-                return acc;
-              }).id + 1
-            : 0, // If no note
-          value: newNote,
-          datetime: date,
-          user: user,
-          mood: newMood,
-          prompt: prompt,
-        },
+        newNoteItem,
       ];
 
       // Add to note context

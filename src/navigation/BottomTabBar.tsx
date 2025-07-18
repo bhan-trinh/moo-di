@@ -1,12 +1,15 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home, HomeScreen } from '../pages/HomeScreen/HomeScreen';
-import { NewNote, NewNoteScreen } from '../pages/NewNoteScreen/NewNoteScreen';
+import { Home, HomeScreen } from '../pages/MainScreens/HomeScreen/HomeScreen';
+import {
+  NewNote,
+  NewNoteScreen,
+} from '../pages/MainScreens/NewNoteScreen/NewNoteScreen';
 import Icon from '@react-native-vector-icons/lucide';
 import styles from '../styles/styles';
 import { Platform } from 'react-native';
-import { ReportScreen } from '../pages/ReportScreen/ReportScreen';
-import { PromptScreen } from '../pages/PromptScreen/PromptScreen';
-import { AccountScreen } from '../pages/AccountScreen/AccountScreen';
+import { ReportScreen } from '../pages/MainScreens/ReportScreen/ReportScreen';
+import { PromptScreen } from '../pages/MainScreens/PromptScreen/PromptScreen';
+import { AccountScreen } from '../pages/MainScreens/AccountScreen/AccountScreen';
 import { DefaultNavigatorOptions } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();

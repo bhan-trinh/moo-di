@@ -4,7 +4,10 @@ import {
 } from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
+  IntroScreen: { index: number | undefined };
   TabBar: undefined;
+  Notes: { month: string; year: string };
+  MyAccount: undefined;
 };
 
 export type NativeStackScreenProps<T extends keyof RootStackParamList> =
@@ -28,6 +31,12 @@ export type HomeScreenNavigationProp = NativeStackScreenProps<
   BottomTabBarParamList,
   'Home'
 >;
+
+export type NotesScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'Notes'
+>;
+
 export type PromptScreenNavigationProp = NativeStackScreenProps<
   BottomTabBarParamList,
   'Prompt'

@@ -1,15 +1,20 @@
 import { Text, TouchableOpacity, View } from 'react-native';
-import styles from '../../../styles/styles';
+import styles from '../../../../styles/styles';
 import { ReactNode } from 'react';
 
 type AccountButtonProps = {
   iconSvg: ReactNode;
   text: string;
+  onPress?: () => void | undefined;
 };
 
-export const AccountButton = ({ iconSvg, text }: AccountButtonProps) => {
+export const AccountButton = ({
+  iconSvg,
+  text,
+  onPress,
+}: AccountButtonProps) => {
   return (
-    <TouchableOpacity style={{ width: '100%' }}>
+    <TouchableOpacity style={{ width: '100%' }} onPress={onPress}>
       <View
         flexDirection="row"
         borderRadius={20}

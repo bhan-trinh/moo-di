@@ -13,25 +13,28 @@
  * dont you think its beautiful that it can resemble the
  */
 
-import {
-  View,
-} from 'react-native';
+import { View } from 'react-native';
 import styles from './styles/styles';
 import { NavigationContainer } from '@react-navigation/native';
 import { NotesProvider } from './services/NoteContext';
 import { BottomTabBar } from './navigation/BottomTabBar';
+import { RootStackNavigator } from './navigation/RootStack';
+import { PaperProvider } from 'react-native-paper';
+import { UserProvider } from './services/UserContext';
 
 function App() {
-  // Load data from SQL db
-
   return (
-    <NotesProvider>
-      <View style={styles.centeredView}>
-        <NavigationContainer>
-          <BottomTabBar />
-        </NavigationContainer>
-      </View>
-    </NotesProvider>
+    <PaperProvider>
+      <UserProvider>
+        <NotesProvider>
+          <View style={styles.centeredView}>
+            <NavigationContainer>
+              <RootStackNavigator />
+            </NavigationContainer>
+          </View>
+        </NotesProvider>
+      </UserProvider>
+    </PaperProvider>
   );
 }
 

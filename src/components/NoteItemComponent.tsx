@@ -11,10 +11,10 @@ import {
 export const NoteItemComponent: React.FC<{
   note: NoteItem;
   deleteItem: Function;
-}> = ({ note: { id, value, datetime, user, mood, prompt }, deleteItem }) => {
-  var dt = datetime.split(' ');
+}> = ({ note: { id, value, created_at, user, mood, prompt }, deleteItem }) => {
+  var dt = new Date(created_at).toString().split(' ');
   var t = dt[4].split(':');
-  var datetimeTrim = `${t[0]}:${t[1]} ${dt[1]} ${dt[2]} ${dt[3]}`;
+  var created_atTrim = `${t[0]}:${t[1]} ${dt[1]} ${dt[2]} ${dt[3]}`;
 
   return (
     <View style={nStyle.noteContainer}>
@@ -35,7 +35,7 @@ export const NoteItemComponent: React.FC<{
         </View>
         <View style={nStyle.headerRightSide}>
           <Text style={[nStyle.text, { color: 'white', fontSize: 15 }]}>
-            {datetimeTrim}
+            {created_atTrim}
           </Text>
         </View>
       </View>

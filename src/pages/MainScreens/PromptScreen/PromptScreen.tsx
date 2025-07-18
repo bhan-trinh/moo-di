@@ -1,6 +1,6 @@
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
-import styles from '../../styles/styles';
-import { PromptScreenNavigationProp } from '../../navigation/type';
+import styles from '../../../styles/styles';
+import { PromptScreenNavigationProp } from '../../../navigation/type';
 
 export const PromptScreen: React.FC<PromptScreenNavigationProp> = ({
   navigation,

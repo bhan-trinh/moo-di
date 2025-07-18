@@ -62,7 +62,7 @@ export const saveNoteItems = async (
   db: SQLiteDatabase,
   noteItems: NoteItem[],
 ) => {
-  const insertQuery = `INSERT OR REPLACE INTO ${tableName} (${getAttr()}) VALUES (${getPlaceholder()})`;
+  const insertQuery = `INSERT INTO ${tableName} (${getAttr()}) VALUES (${getPlaceholder()})`;
 
   const insertParams = noteItems.map(i =>
     getAttr()
@@ -88,3 +88,17 @@ export const delTable = async (db: SQLiteDatabase) => {
   const query = `DROP TABLE IF EXISTS ${tableName};`;
   await db.executeSql(query);
 };
+
+/*
+// Get distinct years
+export const getNoteYears = async (db: SQLiteDatabase) => {
+  const getYearQuery = `SELECT DISTINCT strftime('%', created_at) as 'Year' FROM ${tableName}`;
+  var results = await db.executeSql(getYearQuery);
+  const years = [];
+  results.forEach(result => {
+    for (let i = 0; i < result.rows.length; i++) {
+      years.push(result.rows.item(i));
+    }
+  });
+};
+*/

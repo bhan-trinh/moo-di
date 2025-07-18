@@ -1,16 +1,16 @@
 export type NoteItem = {
   id: number;
   value: string;
-  datetime: string;
+  created_at: string;
   user: string;
   mood: number;
-  prompt?: string;
+  prompt?: string | null;
 };
 
 export const noteItemCol = [
   { attr: 'id', type: 'INTEGER NOT NULL' },
   { attr: 'value', type: 'TEXT NOT NULL' },
-  { attr: 'datetime', type: 'TEXT NOT NULL' },
+  { attr: 'created_at', type: 'TEXT NOT NULL' },
   { attr: 'user', type: 'TEXT NOT NULL' },
   { attr: 'mood', type: 'INTEGER' },
   { attr: 'prompt', type: 'TEXT' },
