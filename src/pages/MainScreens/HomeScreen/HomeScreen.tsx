@@ -43,61 +43,21 @@ export const HomeScreen: React.FC<HomeScreenNavigationProp> = () => {
   const [noteView, setNoteView] = useState('l');
   const [notesDateFiltered, setNotesDateFiltered] = useState({});
 
-  const loadDataCallback = useCallback(async () => {
-    try {
-      const initNotes: NoteItem[] = [
-        {
-          prompt: null,
-          user: userName,
-          created_at: new Date(
-            'Tue Mar 14 2006 14:16:49 GMT+0700',
-          ).toISOString(),
-          value: 'theres no love in february',
-          mood: 0,
-          id: 0,
-        },
-        {
-          prompt: null,
-          user: userName,
-          created_at: new Date(
-            'Tue Feb 14 2006 14:16:49 GMT+0700',
-          ).toISOString(),
-          value: 'stuck with the winter in new york city',
-          mood: 25,
-          id: 1,
-        },
-        {
-          prompt: null,
-          user: userName,
-          created_at: new Date(
-            'Tue Feb 14 2007 14:16:49 GMT+0700',
-          ).toISOString(),
-          value: 'you took my heart to california',
-          mood: 50,
-          id: 2,
-        },
-        {
-          prompt: null,
-          user: userName,
-          created_at: new Date(
-            'Tue Feb 14 2008 14:16:49 GMT+0700',
-          ).toISOString(),
-          value: 'well i spend my days still searching for ya',
-          mood: 75,
-          id: 3,
-        },
-      ];
+  // Initialize database when app opens
+  useEffect(() => {
+    const initDB = async () => {
       const db = await getDBConnection();
       // await delTable(db);
       await createTable(db);
-      const storedNoteItems = await getNoteItems(db);
+    };
+    initDB();
+  }, []);
 
-      if (storedNoteItems.length) {
-        setNotes(storedNoteItems);
-      } else {
-        await saveNoteItems(db, initNotes);
-        setNotes(initNotes);
-      }
+  const loadDataCallback = useCallback(async () => {
+    try {
+      const db = await getDBConnection();
+      const storedNoteItems = await getNoteItems(db);
+      setNotes(storedNoteItems);
     } catch (error) {
       console.error(error);
     }
@@ -122,7 +82,6 @@ export const HomeScreen: React.FC<HomeScreenNavigationProp> = () => {
       data: Object.keys(sortYear[year]),
     }));
     setNotesDateFiltered(sections);
-    console.log(sections);
   }, [notes]);
 
   // Refresh notes display everytime notes context / searched word change

@@ -46,6 +46,9 @@ export const NoteItemComponent: React.FC<{
           {'\n'}mood {mood}
           {prompt ? `${'\n'}prompt ${prompt}` : ''}
         </Text>
+        <View flex={1} borderWidth={1} height={20}>
+          <View flex={1} backgroundColor="grey" width={`${mood}%`} />
+        </View>
       </View>
     </View>
   );

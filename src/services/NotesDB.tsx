@@ -38,6 +38,33 @@ export const createTable = async (db: SQLiteDatabase) => {
     );`;
 
   await db.executeSql(query);
+
+  const initNotes: NoteItem[] = [
+    {
+      prompt: null,
+      user: 'moodi',
+      created_at: new Date().toISOString(),
+      value:
+        'delete a note with the x button at its top left corner. have fun internet blogging!',
+      mood: 50,
+      id: 0,
+    },
+    {
+      prompt: null,
+      user: 'moodi',
+      created_at: new Date().toISOString(),
+      value:
+        'start writing now by clicking the + button at the bottom right of the screen or the tab bar! you can choose prompts, log your mood, track your daily well-being, and more.',
+      mood: 50,
+      id: 1,
+    },
+  ];
+
+  const storedNoteItems = await getNoteItems(db);
+
+  if (!storedNoteItems.length) {
+    await saveNoteItems(db, initNotes);
+  }
 };
 
 export const getNoteItems = async (db: SQLiteDatabase): Promise<NoteItem[]> => {

@@ -1,4 +1,10 @@
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import styles from '../../../styles/styles';
 import { useContext, useEffect, useState } from 'react';
 import { NotesContext } from '../../../services/NoteContext';
@@ -74,57 +80,63 @@ export const NewNoteScreen: React.FC<NewNoteScreenNavigationProp> = ({
   };
 
   return (
-    <View padding={30}>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Home')}
-        style={{ alignItems: 'flex-end' }}
-      >
-        <Icon name="x" size={30} />
-      </TouchableOpacity>
-      <Text style={styles.welcomeText}>create a note!</Text>
+    <ScrollView
+      style={{ flex: 1 }}
+      contentInsetAdjustmentBehavior="automatic"
+      showsVerticalScrollIndicator={false}
+    >
+      <View padding={30}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Home')}
+          style={{ alignItems: 'flex-end' }}
+        >
+          <Icon name="x" size={30} />
+        </TouchableOpacity>
+        <Text style={styles.welcomeText}>create a note!</Text>
 
-      {prompt && (
-        <View>
-          <Text style={styles.text}>{prompt}</Text>
-        </View>
-      )}
-      {/* Add New Note */}
-      <TextInput
-        style={[
-          styles.textInput,
-          styles.text,
-          { height: 300, textAlign: 'left' },
-        ]}
-        textAlignVertical="top"
-        multiline
-        numberOfLines={4}
-        value={newNote}
-        onChangeText={text => setNewNote(text)}
-        placeholder="write a new note"
-      />
+        {prompt && (
+          <View>
+            <Text style={styles.text}>{prompt}</Text>
+          </View>
+        )}
+        {/* Add New Note */}
+        <TextInput
+          style={[
+            styles.textInput,
+            styles.text,
+            { height: 300, textAlign: 'left' },
+          ]}
+          textAlignVertical="top"
+          multiline
+          numberOfLines={4}
+          value={newNote}
+          onChangeText={text => setNewNote(text)}
+          placeholder="write a new note"
+        />
 
-      <Text style={styles.welcomeText}>{'\n'}how are you feeling now?</Text>
-      <Slider
-        style={{ width: '100%', height: 40 }}
-        minimumValue={0}
-        maximumValue={100}
-        minimumTrackTintColor="black"
-        maximumTrackTintColor="black"
-        thumbTintColor="black"
-        value={newMood}
-        onValueChange={val => setMood(Math.floor(val))}
-      />
-      <Text style={styles.text}>{newMood}%</Text>
+        <Text style={styles.welcomeText}>{'\n'}how are you feeling now?</Text>
+        <Slider
+          style={{ width: '100%', height: 40 }}
+          minimumValue={0}
+          maximumValue={100}
+          minimumTrackTintColor="black"
+          maximumTrackTintColor="black"
+          thumbTintColor="black"
+          value={newMood}
+          onValueChange={val => setMood(Math.floor(val))}
+        />
+        <Text style={styles.text}>{newMood}%</Text>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          addNote();
-          navigation.navigate('Home');
-        }}
-      >
-        <Text style={styles.buttonText}>Create</Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            addNote();
+            navigation.navigate('Home');
+          }}
+        >
+          <Text style={styles.buttonText}>Create</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 };

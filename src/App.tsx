@@ -21,17 +21,18 @@ import { BottomTabBar } from './navigation/BottomTabBar';
 import { RootStackNavigator } from './navigation/RootStack';
 import { PaperProvider } from 'react-native-paper';
 import { UserProvider } from './services/UserContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 function App() {
   return (
     <PaperProvider>
       <UserProvider>
         <NotesProvider>
-          <View style={styles.centeredView}>
+          <SafeAreaView style={styles.centeredView}>
             <NavigationContainer>
               <RootStackNavigator />
             </NavigationContainer>
-          </View>
+          </SafeAreaView>
         </NotesProvider>
       </UserProvider>
     </PaperProvider>
