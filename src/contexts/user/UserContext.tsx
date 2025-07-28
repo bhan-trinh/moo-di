@@ -1,5 +1,4 @@
 import { createContext, useState } from 'react';
-import { NoteItem } from '../models/note';
 
 export const UserContext = createContext<string>('moodi');
 

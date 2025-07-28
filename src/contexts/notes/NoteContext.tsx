@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import { NoteItem } from '../models/NoteItem';
+import { NoteItem } from '../../models/note';
 
 export const NotesContext = createContext<NoteItem[]>([]);
 
