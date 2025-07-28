@@ -3,7 +3,7 @@ import {
   openDatabase,
   SQLiteDatabase,
 } from 'react-native-sqlite-storage';
-import { NoteItem, noteItemCol } from '../models/NoteItem';
+import { NoteItem, noteItemCol } from './note';
 
 // Set up table name
 const tableName = 'notesData';

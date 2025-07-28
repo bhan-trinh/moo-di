@@ -13,7 +13,7 @@ import Icon from '@react-native-vector-icons/lucide';
 import Slider from '@react-native-community/slider';
 import { useIsFocused } from '@react-navigation/native';
 import { NewNoteScreenNavigationProp } from '../../../navigation/type';
-import { NoteItem } from '../../../models/NoteItem';
+import { NoteItem } from '../../../models/note';
 import { UserContext } from '../../../services/UserContext';
 
 export const NewNoteScreen: React.FC<NewNoteScreenNavigationProp> = ({

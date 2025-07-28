@@ -1,5 +1,5 @@
 import React from 'react';
-import { NoteItem } from '../models/NoteItem';
+import { NoteItem } from '../models/note';
 import {
   Platform,
   StyleSheet,

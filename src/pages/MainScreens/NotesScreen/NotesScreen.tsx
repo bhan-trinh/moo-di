@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { NoteItem } from '../../../models/NoteItem';
+import { NoteItem } from '../../../models/note';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { delNoteItem, getDBConnection } from '../../../services/NotesDB';
 import styles from '../../../styles/styles';

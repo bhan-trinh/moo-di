@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import styles from '../../../styles/styles';
-import { NoteItem } from '../../../models/NoteItem';
+import { NoteItem } from '../../../models/note';
 import { useNavigation } from '@react-navigation/native';
 import { intro } from '../intro';
 

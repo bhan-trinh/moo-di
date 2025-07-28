@@ -3,7 +3,7 @@ import styles from '../../../styles/styles';
 import { useContext } from 'react';
 import { NotesContext } from '../../../services/NoteContext';
 import { LineChart } from 'react-native-gifted-charts';
-import { NoteItem } from '../../../models/NoteItem';
+import { NoteItem } from '../../../models/note';
 import { ReportScreenNavigationProp } from '../../../navigation/type';
 
 export const ReportScreen: React.FC<ReportScreenNavigationProp> = ({

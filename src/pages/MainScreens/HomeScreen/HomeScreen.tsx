@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { NoteItem } from '../../../models/NoteItem';
+import { NoteItem } from '../../../models/note';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import {
   createTable,
