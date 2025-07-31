@@ -26,12 +26,12 @@ export const NoteItemComponent: React.FC<{
           >
             <Text style={[nStyle.headerButtonText, nStyle.text]}>x</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={nStyle.headerButton}>
+          {/* <TouchableOpacity style={nStyle.headerButton}>
             <Text style={[nStyle.headerButtonText, nStyle.text]}>-</Text>
           </TouchableOpacity>
           <TouchableOpacity style={nStyle.headerButton}>
             <Text style={[nStyle.headerButtonText, nStyle.text]}>+</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <View style={nStyle.headerRightSide}>
           <Text style={[nStyle.text, { color: 'white', fontSize: 15 }]}>

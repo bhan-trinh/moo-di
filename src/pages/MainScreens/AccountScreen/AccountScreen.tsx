@@ -7,7 +7,7 @@ import SettingsSvg from '../../../assets/svg/SettingsSvg';
 import HelpSvg from '../../../assets/svg/HelpSvg';
 import { useNavigation } from '@react-navigation/native';
 import { useContext } from 'react';
-import { UserContext } from '../../../services/UserContext';
+import { UserContext } from '../../../contexts/user/UserContext';
 
 export const AccountScreen: React.FC<AccountScreenNavigationProp> = () => {
   const { userName } = useContext(UserContext);

@@ -1,13 +1,8 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import styles from '../../../styles/styles';
-import UserSvg from '../../../assets/svg/UserSvg';
-import { AccountButton } from './components/AccountButton';
-import { AccountScreenNavigationProp } from '../../../navigation/type';
-import SettingsSvg from '../../../assets/svg/SettingsSvg';
-import HelpSvg from '../../../assets/svg/HelpSvg';
 import { useNavigation } from '@react-navigation/native';
 import { TextInput } from 'react-native';
-import { UserContext } from '../../../services/UserContext';
+import { UserContext } from '../../../contexts/user/UserContext';
 import { useContext, useState } from 'react';
 
 export const MyAccountScreen = () => {

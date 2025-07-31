@@ -7,14 +7,14 @@ import {
 } from 'react-native';
 import styles from '../../../styles/styles';
 import { useContext, useEffect, useState } from 'react';
-import { NotesContext } from '../../../services/NoteContext';
-import { getDBConnection, saveNoteItems } from '../../../services/NotesDB';
+import { NotesContext } from '../../../contexts/notes/NoteContext';
+import { getDBConnection, delNoteItem, saveNoteItems } from '../../../models/NotesDB';
 import Icon from '@react-native-vector-icons/lucide';
 import Slider from '@react-native-community/slider';
 import { useIsFocused } from '@react-navigation/native';
 import { NewNoteScreenNavigationProp } from '../../../navigation/type';
 import { NoteItem } from '../../../models/note';
-import { UserContext } from '../../../services/UserContext';
+import { UserContext } from '../../../contexts/user/UserContext';
 
 export const NewNoteScreen: React.FC<NewNoteScreenNavigationProp> = ({
   navigation,
@@ -74,6 +74,8 @@ export const NewNoteScreen: React.FC<NewNoteScreenNavigationProp> = ({
       // Reset new note screen for next time
       setNewNote('');
       setMood(50);
+
+      await db.close()
     } catch (error) {
       console.error(error);
     }

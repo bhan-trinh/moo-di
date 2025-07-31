@@ -18,20 +18,20 @@ import {
   getNoteItems,
   getNoteYears,
   saveNoteItems,
-} from '../../../services/NotesDB';
+} from '../../../models/NotesDB';
 import styles from '../../../styles/styles';
 import { NoteItemComponent } from '../../../components/NoteItemComponent';
-import { NotesContext } from '../../../services/NoteContext';
+import { NotesContext } from '../../../contexts/notes/NoteContext';
 import {
   HomeScreenNavigationProp,
   RootStackParamList,
 } from '../../../navigation/type';
 import { DateBox } from './components/DateBox';
-import { MONTHS } from '../../../models/Months';
+import { MONTHS } from '../../../models/months';
 import { Portal } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { UserContext } from '../../../services/UserContext';
+import { UserContext } from '../../../contexts/user/UserContext';
 
 export const HomeScreen: React.FC<HomeScreenNavigationProp> = () => {
   const { userName } = useContext(UserContext);
@@ -47,8 +47,11 @@ export const HomeScreen: React.FC<HomeScreenNavigationProp> = () => {
   useEffect(() => {
     const initDB = async () => {
       const db = await getDBConnection();
-      // await delTable(db);
+      console.log('hi');
+      await delTable(db);
+      console.log('move on');
       await createTable(db);
+      await db.close();
     };
     initDB();
   }, []);
@@ -58,6 +61,7 @@ export const HomeScreen: React.FC<HomeScreenNavigationProp> = () => {
       const db = await getDBConnection();
       const storedNoteItems = await getNoteItems(db);
       setNotes(storedNoteItems);
+      await db.close();
     } catch (error) {
       console.error(error);
     }
@@ -122,6 +126,7 @@ export const HomeScreen: React.FC<HomeScreenNavigationProp> = () => {
 
         return newNotes;
       });
+      await db.close();
     } catch (error) {
       console.error(error);
     }
@@ -130,7 +135,13 @@ export const HomeScreen: React.FC<HomeScreenNavigationProp> = () => {
   return (
     <>
       {/* Header */}
-      <View flex={1}>
+      <View
+        style={{
+          flex: 1,
+          padding: 16,
+          backgroundColor: '#EEE',
+        }}
+      >
         <Text style={styles.welcomeText}>good morning.</Text>
 
         <View

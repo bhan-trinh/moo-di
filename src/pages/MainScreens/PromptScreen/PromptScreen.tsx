@@ -1,6 +1,7 @@
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import styles from '../../../styles/styles';
 import { PromptScreenNavigationProp } from '../../../navigation/type';
+import Icon from '@react-native-vector-icons/lucide';
 
 export const PromptScreen: React.FC<PromptScreenNavigationProp> = ({
   navigation,
@@ -20,9 +21,15 @@ export const PromptScreen: React.FC<PromptScreenNavigationProp> = ({
     "you're breathing.",
   ];
   return (
-    <View flex={1}>
+    <View
+      style={{
+        flex: 1,
+        padding: 16,
+        backgroundColor: '#EEE',
+      }}
+    >
       <Text style={styles.welcomeText}>prompts</Text>
-      <View padding={10} flex={1}>
+      <View padding={12} flex={1}>
         <FlatList
           showsVerticalScrollIndicator={false}
           data={prompts}
@@ -35,19 +42,38 @@ export const PromptScreen: React.FC<PromptScreenNavigationProp> = ({
                 height: 1,
                 width: 200,
                 margin: 5,
-                backgroundColor: 'black',
+                // backgroundColor: 'black',
                 alignSelf: 'center',
               }}
             />
           )}
           renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate('NewNote', { prompt: item })}
+            <View
+              style={{
+                borderWidth: 1,
+                flexDirection: 'row',
+              }}
             >
-              <View>
+              <View style={{ flex: 1, padding: 10 }}>
                 <Text style={styles.text}>{item}</Text>
               </View>
-            </TouchableOpacity>
+              <View
+                style={{
+                  width: 40,
+                  backgroundColor: 'black',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('NewNote', { prompt: item })
+                  }
+                >
+                  <Icon name="plus" size={20} color={'white'} />
+                </TouchableOpacity>
+              </View>
+            </View>
           )}
         />
       </View>

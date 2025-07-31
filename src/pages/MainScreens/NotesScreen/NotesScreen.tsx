@@ -8,12 +8,12 @@ import {
 } from 'react-native';
 import { NoteItem } from '../../../models/note';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { delNoteItem, getDBConnection } from '../../../services/NotesDB';
+import { delNoteItem, getDBConnection } from '../../../models/NotesDB';
 import styles from '../../../styles/styles';
 import { NoteItemComponent } from '../../../components/NoteItemComponent';
-import { NotesContext } from '../../../services/NoteContext';
+import { NotesContext } from '../../../contexts/notes/NoteContext';
 import { NotesScreenNavigationProp } from '../../../navigation/type';
-import { MONTHS } from '../../../models/Months';
+import { MONTHS } from '../../../models/months';
 import { useNavigation } from '@react-navigation/native';
 
 export const user = 'user';

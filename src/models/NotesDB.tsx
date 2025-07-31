@@ -31,6 +31,7 @@ export const getDBConnection = async () => {
 };
 
 export const createTable = async (db: SQLiteDatabase) => {
+  console.log('creating table');
   // create table if not exists
   const query = `CREATE TABLE IF NOT EXISTS ${tableName} (
         ${getCol()},
@@ -63,6 +64,7 @@ export const createTable = async (db: SQLiteDatabase) => {
   const storedNoteItems = await getNoteItems(db);
 
   if (!storedNoteItems.length) {
+    console.log(storedNoteItems);
     await saveNoteItems(db, initNotes);
   }
 };
@@ -111,9 +113,11 @@ export const delNoteItem = async (db: SQLiteDatabase, id: number) => {
 };
 
 export const delTable = async (db: SQLiteDatabase) => {
+  console.log('deleting');
   // Careful of SQLite vs. SQL server
-  const query = `DROP TABLE IF EXISTS ${tableName};`;
+  const query = `DROP TABLE ${tableName}`;
   await db.executeSql(query);
+  console.log('delete done');
 };
 
 /*

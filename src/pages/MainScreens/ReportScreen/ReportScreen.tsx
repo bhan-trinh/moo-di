@@ -1,7 +1,7 @@
 import { Text, View } from 'react-native';
 import styles from '../../../styles/styles';
 import { useContext } from 'react';
-import { NotesContext } from '../../../services/NoteContext';
+import { NotesContext } from '../../../contexts/notes/NoteContext';
 import { LineChart } from 'react-native-gifted-charts';
 import { NoteItem } from '../../../models/note';
 import { ReportScreenNavigationProp } from '../../../navigation/type';
@@ -34,7 +34,13 @@ export const ReportScreen: React.FC<ReportScreenNavigationProp> = ({
   });
 
   return (
-    <View>
+    <View
+      style={{
+        flex: 1,
+        padding: 16,
+        backgroundColor: '#EEE',
+      }}
+    >
       <Text style={styles.welcomeText}>mood report</Text>
       <View
         style={{ justifyContent: 'center', alignItems: 'center', padding: 10 }}

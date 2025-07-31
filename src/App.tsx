@@ -16,14 +16,16 @@
 import { View } from 'react-native';
 import styles from './styles/styles';
 import { NavigationContainer } from '@react-navigation/native';
-import { NotesProvider } from './services/NoteContext';
 import { BottomTabBar } from './navigation/BottomTabBar';
 import { RootStackNavigator } from './navigation/RootStack';
 import { PaperProvider } from 'react-native-paper';
-import { UserProvider } from './services/UserContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { UserProvider } from './contexts/user/UserContext';
+import { NotesProvider } from './contexts/notes/NoteContext';
+import { LogBox } from 'react-native';
 
 function App() {
+  LogBox.ignoreAllLogs(true);
   return (
     <PaperProvider>
       <UserProvider>
